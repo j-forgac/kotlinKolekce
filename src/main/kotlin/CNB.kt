@@ -11,9 +11,13 @@ fun main(){
         user = user.replace("\\{".toRegex(), "")
         user = user.replace("TO".toRegex(), "")
         userArr = user.split("}").toTypedArray()
-        val count = userArr[0].toFloat()
-        val from = userArr[1]
-        val to = userArr[2]
-        println(count * currency[from]!! / currency[to]!!)
+        try {
+            val count = userArr[0].toFloat()
+            val from = currency.getValue(userArr[1])
+            val to = currency.getValue(userArr[2])
+            println(count * from / to)
+        } catch (e: Exception){
+            println("neznám bohužel kurz zadané měny")
+        }
     }
 }
